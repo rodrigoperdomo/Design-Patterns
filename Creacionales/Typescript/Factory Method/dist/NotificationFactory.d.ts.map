@@ -1,0 +1,1 @@
+{"version":3,"file":"NotificationFactory.d.ts","sourceRoot":"","sources":["../NotificationFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,iBAAiB,EAAE,MAAM,qBAAqB,CAAC;AACxD,OAAO,EAAE,gBAAgB,EAAE,MAAM,oBAAoB,CAAC;AACtD,OAAO,EAAE,eAAe,EAAE,MAAM,mBAAmB,CAAA;AAEnD,qBAAa,mBAAmB;IAC5B,MAAM,CAAC,iBAAiB,CAAC,IAAI,EAAE,MAAM;CAaxC"}
