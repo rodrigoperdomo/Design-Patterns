@@ -1,0 +1,135 @@
+-------------------
+Patrones de diseño
+-------------------
+
+- Patrones de diseño: Se puede pensar como una caja de herramientas, donde según que tipo de problema se pueda implementar una u otro patron.
+Se pueden dividir en tres tipos:
+
+- Creacionales
+- Estructurales
+- Comportamiento
+
+----------------
+Creacionales:
+----------------
+
+- Factory Method: La idea del patron del Factory Method es crear o instanciar clases desde un método sin mostrar al cliente la instancia por cada clase, sino dejarsela al metodo factory que lo haga.
+
+- Builder Pattern: Cuando queremos crear una nueva clase que tiene muchos atributos, crear varios constructores no es la mejor opción, la idea del builder pattern es generar a partir de una clase estatica estos atributos.
+
+- Singleton Pattern: La idea del Singleton Pattern es que una clase tenga una unica instancia que se crea a partir de un metodo statico y la instancia también sea estatica.
+
+- Prototype Pattern: La idea principal del Prototype pattern es clonar objetos a partir de una clase base, se usa solamente cuando queremos cambiar algo específico de la clase base pero manteniendo datos y estructura.
+
+- Abstract Factory: A diferencia del factory Method, el abstract factory crea una familia de productos o instancias, en cambio en factory method se encarga de uno solo. La idea es hacer la creación de estos objetos con la
+abtracción de clases e interfaces.
+
+---------------
+Estructurales:
+---------------
+
+- Adapter Pattern:El patron adapter nos sirve para cuando tenemos dos clases incompatibles ya sea por distintas versiones o ejecución de librería de terceros y lo necesitamos a una nueva clase, funciona crear una clase que adapte las dos clases o sirva de conexión, por ejemplo un sistema que hacia reportes y retornaba en xml y ahora otro cliente pide el mismo reporte pero en json.
+
+- Composite Pattern: El patron composite sirve para adjuntar clases o elementos a una clase en particular, lo hace a traves del interfaz que implementa, Por ejemplo cuando se trata de archivos y carpetas. En otras palabras
+El Composite Pattern se usa cuando querés tratar objetos individuales y conjuntos de objetos de la misma forma.
+
+Component
+├── Leaf
+└── Composite
+
+
+- Decorator pattern: El Decorator Pattern te permite agregar funcionalidades a un objeto en tiempo de ejecución, envolviéndolo dentro de otro objeto que implementa la misma interfaz.
+
+Component
+├── ConcreteComponent
+└── Decorator
+     ├── ConcreteDecoratorA
+     └── ConcreteDecoratorB
+
+- Facade Pattern : El patrón Facade proporciona una interfaz unificada y sencilla para un conjunto de sub-sistemas o clases complejas. Es como tener una “fachada” (una cara visible) que oculta toda la complejidad interna del sistema y ofrece solo los métodos necesarios al cliente.
+
+
+Cliente → Facade → Subsistema A
+                 → Subsistema B
+                 → Subsistema C
+- Bridge Pattern: El Bridge Pattern (Puente) es un patrón estructural que busca desacoplar una abstracción de su implementación, de forma que ambas puedan variar independientemente.
+
+👉 Es decir: en vez de tener una jerarquía gigante de clases que combinan varias dimensiones (por ejemplo, Forma + Método de Dibujo), el patrón divide esas dimensiones en dos jerarquías separadas que se conectan mediante un “puente”.
+
+          Abstraction (Forma)
+                 │
+         ┌───────┴─────────┐
+Refined Abstraction   (Círculo, Rectángulo)
+
+                 ↓ (usa)
+           Implementor (API de dibujo)
+                 │
+         ┌───────┴─────────┐
+ConcreteImplementor1   ConcreteImplementor2
+(API1, API2, etc.)
+
+
+--------------
+Comportamiento
+--------------
+
+- Observer Pattern: El patrón Observer define una relación uno a muchos entre objetos, de manera que cuando un objeto cambia su estado (el sujeto), todos sus observadores son notificados automáticamente.
+👉 En otras palabras:
+“Cuando algo cambia, los interesados se enteran.”
+
+            ┌──────────────┐
+            │   Subject    │◄────────────────────────┐
+            │ attach()     │                         │
+            │ detach()     │                         │
+            │ notify()     │                         │
+            └──────┬───────┘                         │
+                   │                                 │
+        ┌──────────┴──────────┐                      │
+        │ ConcreteSubject     │                      │
+        │ - state             │                      │
+        │ + getState()        │                      │
+        │ + setState()        │───(llama notify())───┘
+        └──────────┬──────────┘
+                   │
+           ┌───────┴────────┐
+           │   Observer     │
+           │ + update()     │
+           └───────┬────────┘
+                   │
+        ┌──────────┴──────────┐
+        │ ConcreteObserver    │
+        │ - subject           │
+        │ + update()          │
+        └─────────────────────┘
+
+
+- Strategy Pattern: El patrón Strategy te permite definir una familia de algoritmos, encapsular cada uno, y hacerlos intercambiables.
+La idea es separar el comportamiento (la estrategia) del contexto (la clase que la usa).
+
+Esto evita tener grandes estructuras if o switch para elegir un comportamiento, y en su lugar puedes cambiar el comportamiento en tiempo de ejecución.
+
+Imaginá que estás desarrollando un sistema de pago para un e-commerce.
+Querés soportar pago con tarjeta, PayPal y criptomonedas.
+Sin el patrón Strategy, quizás harías algo así:
+
+if (metodo.equals("tarjeta")) {
+    // lógica para tarjeta
+} else if (metodo.equals("paypal")) {
+    // lógica para PayPal
+} else if (metodo.equals("cripto")) {
+    // lógica para cripto
+}
+
+
+Esto es difícil de mantener y extender.
+Con Strategy, podés hacerlo mucho más limpio 👇
+
+
+💡 Ventajas
+✅ Evita el uso de muchos if o switch
+✅ Permite agregar nuevas estrategias sin modificar el código existente
+✅ Hace el código más abierto a extensión y cerrado a modificación (Principio Open/Closed)
+
+⚠️ Desventajas
+❌ Puede aumentar el número de clases
+❌ Requiere que el cliente sepa qué estrategia usar
